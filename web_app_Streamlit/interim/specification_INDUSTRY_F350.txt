@@ -1,0 +1,125 @@
+Print technology:
+Build volume:
+Min. layer height:
+Number of printheads:
+Nozzle diameter:
+Filament diameter:
+Printhead temperature:
+Buildplate temperature:
+Chamber temperature: 
+Filament chamber temperature:
+Achievable part accuracy:
+FFF
+340 x 340 x 350 mm (40 460 cm3)
+50 μm
+2, purging system
+0.5/0.5 mm or 0.4/0.4mm
+1.75 mm
+500°C
+160°C
+140°C (active heating)
+50°C
+Parts are printed with an accuracy of 0.125 
+mm or 0.0014 mm/mm, whichever is greater. 
+Accuracy in Z-axis includes an additional 
+tolerance of 0.000/+ layer height.
+Travel move: 
+Printing speed:  
+1000 mm/s
+up to 400 mm/s
+External dimensions: 
+Mass: 
+1825 x 960 x 940 mm
+335 kg
+Chassis: 
+External:
+ 
+Build surface:
+steel
+steel, chamber lined 
+with stainless steel
+borosilicate glass / magnetic sheets
+Working temperature: 
+Storage temperature: 
+18-30°C
+-20-54°C
+Power requirements: 
+Max power draw: 
+Communication: 
+- 230V 1ph 16A, CEE 7/7 plug
+- 2 x 120V 180° interfacial, NEMA 
+6I-20P 20A plug (USA)
+3300 W
+ethernet, Wi-Fi, USB drive
+Slicing software: 
+Cloud based services: 
+3DGence SLICER 4.0
+3DGence CLOUD 
+yes, optional
+main chamber door, top access 
+hatch, thermal sensors, emergency 
+switch
+yes, optional
+software access overdrive - remote 
+shut down
+Advanced Filtration Unit: 
+Sensors: 
+UPS device: 
+Others: 
+PRINTING
+SPEED
+DIMENSIONS AND MASS
+ENVIRONMENT
+POWER
+SOFTWARE
+SAFETY
+CONSTRUCTION
+INDUSTRY
+INDUSTRY
+F350
+F350
+SPECIFICATION
+SPECIFICATION
+Job-specific printing 
+modules and developed 
+printing profiles
+Flexibility
+and performance
+M
+280
+TEMPERATURE:
+up to 280°C
+NOZZLE DIAMETER:
+0,5 mm/0,5 mm
+MODEL MATERIAL:
+PLA, ABS, ASA, PA6, PA-CF
+SUPPORT MATERIAL:
+ESM-10, HIPS
+M
+360
+TEMPERATURE:
+up to 360°C
+NOZZLE DIAMETER:
+0,4 mm/0,4 mm
+MODEL MATERIAL:
+PC
+SUPPORT MATERIAL:
+ESM-10
+M
+500
+TEMPERATURE:
+up to 500°C
+NOZZLE DIAMETER:
+0,4 mm/0,4 mm
+MODEL MATERIAL:
+PEEK
+SUPPORT MATERIAL:
+ESM-10
+INDUSTRY
+INDUSTRY
+F350
+F350
+MODULES
+MODULES
+www.3dgence.com
+rev. 02/2021

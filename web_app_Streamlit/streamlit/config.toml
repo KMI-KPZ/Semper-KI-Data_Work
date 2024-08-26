@@ -1,0 +1,26 @@
+# Theme settings to define the appearance of the app
+[theme]
+base="light"  # Options: "light", "dark"
+primaryColor="#1f77b4"  # Primary color of the app (e.g., blue)
+backgroundColor="#f5f5f5"  # Background color of the app
+secondaryBackgroundColor="#ffffff"  # Background color for secondary areas
+textColor="#333333"  # Color of the text
+
+# Server settings to configure app hosting and performance
+[server]
+headless = true  # Run the app in headless mode (no browser UI)
+port = 8501  # Port number on which the app will run
+address = "0.0.0.0"  # Listen on all network interfaces (useful for cloud deployments)
+
+# Caching settings to manage data caching
+[caching]
+cache_dir = "cache"  # Directory for storing cache files
+
+# Logging settings to manage log file location and level
+[logger]
+level = "debug"  # Logging level: "debug", "info", "warning", "error", "critical"
+log_file = "pipeline.log"  # Log file location for detailed logs
+
+# Enable or disable certain features
+[features]
+new_sidebar = true  # Enable the new sidebar layout (if applicable)
