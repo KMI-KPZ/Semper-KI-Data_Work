@@ -1,11 +1,10 @@
-#app.py
-
 import streamlit as st
 import os
 from pathlib import Path
 from extract_text import process_folder as extract_text
 from extract_desired_json import process_folder as extract_desired_json
 from extract_generic_json import process_folder as extract_generic_json
+import openai
 
 # Define paths
 UPLOAD_FOLDER = Path('uploads')
@@ -27,10 +26,10 @@ def clear_folders():
                 file.unlink()
 
 @st.cache_data
-def cache_process_files(uploaded_files, extraction_type, model_type):
-    return process_files(uploaded_files, extraction_type, model_type)
+def cache_process_files(uploaded_files, extraction_type, model_type, api_key):
+    return process_files(uploaded_files, extraction_type, model_type, api_key)
 
-def process_files(uploaded_files, extraction_type, model_type):
+def process_files(uploaded_files, extraction_type, model_type, api_key):
     # Clear previous files
     clear_folders()
     
@@ -46,11 +45,14 @@ def process_files(uploaded_files, extraction_type, model_type):
         except Exception as e:
             st.error(f"Failed to save file {uploaded_file.name}: {e}")
             raise e
-    
+
+    # Set the OpenAI API key
+    openai.api_key = api_key
+
     # Process the uploaded files
     try:
         extract_text(UPLOAD_FOLDER, INTERIM_FOLDER)
-        
+
         if extraction_type == 'desired':
             extract_desired_json(INTERIM_FOLDER, DESIRED_PROCESSED_FOLDER, model_type)
             processed_folder = DESIRED_PROCESSED_FOLDER
@@ -74,6 +76,10 @@ def main():
     st.title('PDF Extractor')
 
     st.header('Upload PDFs for JSON Data Extraction')
+
+    # API Key input
+    api_key = st.text_input("Enter your OpenAI API key:", type="password")
+
     uploaded_files = st.file_uploader("Select PDF Files:", accept_multiple_files=True, type=["pdf", "txt"])
 
     extraction_type = st.selectbox("Choose Extraction Type:", ["desired", "generic"])
@@ -86,30 +92,33 @@ def main():
 
     if st.button("Upload", disabled=st.session_state.upload_button_disabled):
         if uploaded_files:
-            with st.spinner('Processing files...'):
-                try:
-                    output_files, processed_folder = cache_process_files(uploaded_files, extraction_type, model_type)
-                    st.success('Files processed successfully!')
-                    
-                    # Display download links
-                    if output_files:
-                        st.subheader('Download Processed Files:')
-                        for file_path in output_files:
-                            if file_path.exists():
-                                with open(file_path, 'rb') as f:
-                                    st.download_button(
-                                        label=f"Download {file_path.name}",
-                                        data=f.read(),
-                                        file_name=file_path.name,
-                                        mime='application/octet-stream'
-                                    )
-                            else:
-                                st.error(f"File not found: {file_path}")
-                    else:
-                        st.warning("No files found in the output directory.")
+            if not api_key:
+                st.error("Please enter your OpenAI API key.")
+            else:
+                with st.spinner('Processing files...'):
+                    try:
+                        output_files, processed_folder = cache_process_files(uploaded_files, extraction_type, model_type, api_key)
+                        st.success('Files processed successfully!')
+                        
+                        # Display download links
+                        if output_files:
+                            st.subheader('Download Processed Files:')
+                            for file_path in output_files:
+                                if file_path.exists():
+                                    with open(file_path, 'rb') as f:
+                                        st.download_button(
+                                            label=f"Download {file_path.name}",
+                                            data=f.read(),
+                                            file_name=file_path.name,
+                                            mime='application/octet-stream'
+                                        )
+                                else:
+                                    st.error(f"File not found: {file_path}")
+                        else:
+                            st.warning("No files found in the output directory.")
 
-                except Exception as e:
-                    st.error(f"An error occurred: {e}")
+                    except Exception as e:
+                        st.error(f"An error occurred: {e}")
         else:
             st.error("Please upload files.")
 
@@ -124,3 +133,4 @@ if __name__ == "__main__":
     if 'upload_button_disabled' not in st.session_state:
         st.session_state.upload_button_disabled = True
     main()
+
